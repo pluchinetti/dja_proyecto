@@ -1,0 +1,166 @@
+title Prototipo - Cambiar Visual del Jugador
+author Pablo Luchinetti
+
+========
+OBJECTS
+========
+
+Background
+lightgreen green
+11111
+11111
+11111
+11111
+11111
+
+FirePower
+red yellow orange
+000..
+.020.
+00200
+01110
+.010.
+
+
+WaterPower
+blue lightblue 
+..0..
+.000.
+01000
+01000
+.010.
+
+
+Wall
+brown darkbrown
+00010
+11111
+01000
+11111
+00010
+
+NormalChickenRight
+orange white yellow red
+..33.
+..122
+.111.
+1111.
+.0.0.
+
+
+NormalChickenLeft
+orange white yellow red
+.33..
+221..
+.111.
+.1111
+.0.0.
+
+
+FireChickenRight
+orange red yellow white
+..33.
+..122
+.111.
+1111.
+.0.0.
+
+FireChickenLeft
+orange red yellow white
+.33..
+221..
+.111.
+.1111
+.0.0.
+
+
+WaterChickenRight
+orange blue yellow white
+..33.
+..122
+.111.
+1111.
+.0.0.
+
+WaterChickenLeft
+orange blue yellow white
+.33..
+221..
+.111.
+.1111
+.0.0.
+
+
+=======
+LEGEND
+=======
+
+. = Background
+# = Wall
+P = NormalChickenRight
+F = FirePower
+W = WaterPower
+
+
+NormalChicken = NormalChickenLeft OR NormalChickenRight
+FireChicken = FireChickenLeft OR FireChickenRight
+WaterChicken = WaterChickenLeft OR WaterChickenRight
+Player = NormalChicken OR FireChicken OR WaterChicken
+
+=======
+SOUNDS
+=======
+
+Sfx0 90508102
+Sfx1 23377503
+================
+COLLISIONLAYERS
+================
+
+Background
+FirePower, WaterPower
+Player, NormalChicken, FireChicken, WaterChicken, Wall
+
+======
+RULES
+======
+
+[ > NormalChickenRight | FirePower ] -> [ > FireChickenRight | FirePower ] Sfx0
+[ > NormalChickenLeft | FirePower ] -> [ > FireChickenLeft | FirePower ] Sfx0
+
+[ > NormalChickenRight | WaterPower ] -> [ > WaterChickenRight | WaterPower ] Sfx1
+[ > NormalChickenLeft | WaterPower ] -> [ > WaterChickenLeft | WaterPower ] Sfx1
+
+[ > FireChickenRight | WaterPower ] -> [ > WaterChickenRight | WaterPower ] Sfx1
+[ > FireChickenLeft | WaterPower ] -> [ > WaterChickenLeft | WaterPower ] Sfx1
+
+[ > WaterChickenRight | FirePower ] -> [ > FireChickenRight | FirePower ] Sfx0
+[ > WaterChickenLeft | FirePower ] -> [ > FireChickenLeft | FirePower ] Sfx0
+
+
+[ LEFT NormalChickenRight ] -> [ LEFT NormalChickenLeft]
+[ RIGHT NormalChickenLeft ] -> [ RIGHT NormalChickenRight]
+
+[ LEFT FireChickenRight ] -> [ LEFT FireChickenLeft]
+[ RIGHT FireChickenLeft ] -> [ RIGHT FireChickenRight]
+
+[ LEFT WaterChickenRight ] -> [ LEFT WaterChickenLeft]
+[ RIGHT WaterChickenLeft ] -> [ RIGHT WaterChickenRight]
+
+
+==============
+WINCONDITIONS
+==============
+
+
+=======
+LEVELS
+=======
+
+###############
+#.............#
+#....F...W....#
+#.............#
+#......P......#
+#.............#
+###############

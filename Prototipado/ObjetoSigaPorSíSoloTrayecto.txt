@@ -1,0 +1,161 @@
+title Prototipo - Objeto Sigue Solo Trayecto
+author Pablo Luchinetti
+
+realtime_interval 0.5
+
+========
+OBJECTS
+========
+
+Background
+lightgreen green
+11111
+11111
+11111
+11111
+11111
+
+
+Wall
+brown darkbrown
+00010
+11111
+01000
+11111
+00010
+
+NormalChickenRight
+orange white yellow red
+..33.
+..122
+.111.
+1111.
+.0.0.
+
+
+NormalChickenLeft
+orange white yellow red
+.33..
+221..
+.111.
+.1111
+.0.0.
+
+
+WaterEnemyRight
+orange blue yellow white
+..33.
+..122
+.111.
+1111.
+.0.0.
+
+WaterEnemyLeft
+orange blue yellow white
+.33..
+221..
+.111.
+.1111
+.0.0.
+
+
+MoveLeft
+black red
+00100
+01000
+11111
+01000
+00100
+
+MoveRight
+black red
+00100
+00010
+11111
+00010
+00100
+
+MoveUp
+black red
+00100
+01110
+10101
+00100
+00100
+
+MoveDown
+black red
+00100
+00100
+10101
+01110
+00100
+
+
+
+=======
+LEGEND
+=======
+
+. = Background
+# = Wall
+P = NormalChickenLeft
+F = WaterEnemyRight
+S = WaterEnemyRight AND MoveRight
+L = MoveLeft
+R = MoveRight
+U = MoveUp
+D = MoveDown
+
+
+NormalChicken = NormalChickenLeft OR NormalChickenRight
+MovePlate = MoveLeft OR MoveRight OR MoveUp OR MoveDown
+WaterEnemy = WaterEnemyLeft OR WaterEnemyRight
+Player = NormalChicken
+
+=======
+SOUNDS
+=======
+
+Sfx0 64240709
+================
+COLLISIONLAYERS
+================
+
+Background
+MovePlate
+Player, NormalChicken, WaterEnemy, Wall
+
+======
+RULES
+======
+
+[stationary WaterEnemy MoveRight] -> [RIGHT WaterEnemy  MoveRight]
+[stationary WaterEnemy MoveDown] -> [DOWN WaterEnemy MoveDown]
+[stationary WaterEnemy MoveLeft] -> [LEFT WaterEnemy MoveLeft]
+[stationary WaterEnemy MoveUp] -> [ UP WaterEnemy MoveUp]
+
+[WaterEnemyRight MoveLeft] -> [WaterEnemyLeft MoveLeft] Sfx0
+[WaterEnemyLeft MoveRight] -> [WaterEnemyRight MoveRight] Sfx0
+
+
+
+[LEFT NormalChickenRight ] -> [LEFT NormalChickenLeft]
+[RIGHT NormalChickenLeft ] -> [RIGHT NormalChickenRight]
+
+==============
+WINCONDITIONS
+==============
+
+
+=======
+LEVELS
+=======
+
+###############
+#...SRRRRRRD..#
+#..........D..#
+#...RRRRR.PD..#
+#...U......D..#
+#...ULLLLLLL..#
+###############
